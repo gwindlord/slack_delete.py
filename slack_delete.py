@@ -16,16 +16,16 @@ def main():
     options = parser.parse_args()
 
     try:
-        print "[*] Fetching file list.."
+        print("[*] Fetching file list..")
         file_ids = list_file_ids(token=options.token, count=options.count, days=options.days)
 
-        print "[*] Deleting files.."
+        print("[*] Deleting files..")
         delete_files(token=options.token, file_ids=file_ids)
 
-        print "[*] Done"
+        print("[*] Done")
 
     except KeyboardInterrupt:
-        print "\b\b[-] Aborted"
+        print("\b\b[-] Aborted")
         exit(1)
 
 
@@ -72,9 +72,9 @@ def delete_files(token, file_ids):
         uri = 'https://slack.com/api/files.delete'
         response = json.loads(requests.get(uri, params=params).text)
         if response["ok"]:
-            print "[+] Deleted", count, "of", num_files, "-", file_id, json.loads(response.text)['ok']
+            print("[+] Deleted {} of {} - {}".format(count, num_files, file_id))
         else:
-            print "[!] Unable to delete", count, "of", num_files, "-", file_id + ", reason:", response["error"]
+            print("[!] Unable to delete {} of {} - {}, reason: {}".format(count, num_files, file_id, response["error"]))
 
 if __name__ == '__main__':
     main()
