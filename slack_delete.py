@@ -104,8 +104,7 @@ def delete_files(token: str, files: List[Dict[str, Union[str, int]]], view_only:
 
     try:
         count = 0
-        # uri ='https://slack.com/api/files.delete'
-        uri ='https://slack.com/api/files.list'
+        uri ='https://slack.com/api/files.delete'
         size_to_delete = sum([int(f['size']) for f in files])
         num_files = len(files)
         print('[i] %s found %s files in %s bytes' % (current_timestamp(), num_files, size_to_delete))
